@@ -1,0 +1,13 @@
+@import 'variables';
+
+.tab {
+  position: fixed;
+  z-index: 1;
+  top:35%;
+  width:25px;
+  border-bottom: $border-tab-style;
+  border-top:$border-tab-style;
+  border-right: $border-tab-style;
+  padding:5px;
+
+}

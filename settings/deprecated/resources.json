@@ -1,0 +1,21 @@
+{
+  "RESOURCE_PATH": "resources",
+  "basic": {
+    "README.md": "README_template.md",
+    "LICENSE": "licenses/mit_license_template"
+  },
+  "python_package": {
+    "setup.py": "setup_template.py",
+    "include": ["basic"]
+  },
+  "react_app": {
+    "_root": "react",
+    "node_modules": "node_modules",
+    "package.json": "package.json",
+    "package-lock.json": "package-lock.json"
+  },
+  "flask_app": {
+    "_root": "flask",
+    "include": ["basic"]
+  }
+}
