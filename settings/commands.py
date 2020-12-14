@@ -21,6 +21,15 @@ react/npm/websites:
       npm i --save @fortawesome/fontawesome-svg-core
       npm install --save @fortawesome/free-solid-svg-icons
       npm install --save @fortawesome/react-fontawesome
+      
+django:
+
+    django-admin startproject PROJECTNAME # to create a new project
+    python manage.py startapp  # to create a new app
+    python manage.py createsuperuser # to create a new admin user
+
+
+    
 '''
 
 
