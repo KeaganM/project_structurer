@@ -159,3 +159,196 @@ class Footer extends React.Component {
 
 export default Footer
 ```
+
+
+### React Routes
+
+In order to properly use routes you will need to import the following if you have both your
+links and your routes in the same file:
+
+```react
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+```
+
+and write the app like so: 
+
+```react
+export default function App() {
+    return (
+        <Router>
+            <div>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to='/'>Home</Link>
+                        </li>
+                        <li>
+                            <Link to='/about'>About</Link>
+                        </li>
+                        <li>
+                            <Link to='/users'>Users</Link>
+                        </li>
+                    </ul>
+                </nav>
+                <Switch>
+                    <Route path='/about'>
+                        <About/>
+                    </Route>
+                    <Route path='/users'>
+                        <Users/>
+                    </Route>
+                    <Route path='/'>
+                        <Home/>
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
+    );
+}
+
+function About() {
+    return <h2>about</h2>
+}
+
+function Users() {
+    return <h2>users</h2>
+}
+
+function Home() {
+    return <h2>home</h2>
+
+```
+Note, for some reason all routes should come before the '/' route otherwise it may not work. 
+ 
+If you want to separate your links and your routes for example, have your links in the header component and 
+your routes elsewhere you will first want to import just 
+
+```react
+import {Links} from "react-router-dom"
+```
+
+and apply them like so
+
+```react
+<HeaderItem content={<Link to='/main'>Main</Link>}/>
+```
+
+and then wherever you want your routes you would:
+
+```react
+export default class App extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            button_text: 'a test from app'
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <Router>
+                    <SideNav/>
+                    <Header/>
+                    <Switch>
+                        {/*note routes should come before the home path "/"*/}
+                        <Route path='/main'>
+                            <ContentContainer/>
+                        </Route>
+                        <Route path='/about'>
+                            <p>an about</p>
+                        </Route>
+                        <Route path='/'>
+                            <LandingContainer/>
+                        </Route>
+
+                    </Switch>
+                    <Footer/>
+                </Router>
+            </div>
+
+        )
+    }
+}
+```
+
+However you should import both the links and the routes that will go together into the same
+file such as the app.js. It would probably be best if you had the links in the header/footer
+or other components that are accessible at all times so that the routes can always be tied to them
+in the app folder:
+
+```react
+render() {
+        return (
+            <nav>
+                <div className='nav-wrapper blue-grey'>
+                    <div className='container'>
+                        <Logo custom_css='my-custom-class'/>
+                        <ul id='nav-mobile' className='right hide-on-med-and-down'>
+                            <HeaderItem content={<BasicLink link='https://www.google.com' text='google'/>}/>
+                            <HeaderItem content={<Link to='/main'>Main</Link>}/>
+                            <HeaderItem content={<BasicDropDown display_name='dropdown' data_target='dropdown_1'
+                                                                content={
+                                                                    [
+                                                                        {
+                                                                            link: 'https://www.google.com',
+                                                                            text: 'google'
+                                                                        },
+                                                                        {
+                                                                            link: 'https://www.facebook.com',
+                                                                            text: 'facebook'
+                                                                        }
+
+                                                                    ]
+                                                                }
+
+                            />}/>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        )
+    }
+}
+```
+
+so here you have the Link the the file Header.js and then you would have your switch/routes in the
+App.js. So App.js acts as the overarching component that takes in all the other components 
+(and their nested components as well): 
+
+
+```react
+    render() {
+        return (
+            <div>
+                <Router>
+                    <SideNav/>
+                    <Header/>
+                    <Switch>
+                        {/*note routes should come before the home path "/"*/}
+                        <Route path='/main'>
+                            <ContentContainer/>
+                        </Route>
+                        <Route path='/about'>
+                            <p>an about</p>
+                        </Route>
+                        <Route path='/'>
+                            <LandingContainer/>
+                        </Route>
+
+                    </Switch>
+                    <Footer/>
+                </Router>
+            </div>
+
+        )
+    }
+}
+```
+ 
